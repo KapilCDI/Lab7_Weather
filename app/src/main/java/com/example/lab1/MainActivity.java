@@ -1,77 +1,96 @@
 package com.example.lab1;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.Switch;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
-    Button btn1, btn2;
-    TextView txt1;
-    CheckBox checkBox;
-    RadioButton radioButton;
-    Switch switch1;
-    ImageButton imageButton;
+import com.example.recyclerview.R;
 
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextPassword;
+    private Button btn;
+    private TextView txt;
+
+    /**
+     * Sets up the user interface for the app and defines the onClick behavior for the button.
+     *
+     * @param savedInstanceState The current saved state of the application.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn1 = findViewById(R.id.btnHello);
-        btn2 = findViewById(R.id.butChange);
-        txt1 = findViewById(R.id.txtName);
-        checkBox = findViewById(R.id.checkBox);
-        radioButton = findViewById(R.id.radioButton);
-        switch1 = findViewById(R.id.switch1);
-        imageButton = findViewById(R.id.imageButton);
+        // Initialize views
+        txt = findViewById(R.id.textVie);
+        btn = findViewById(R.id.but);
+        editTextPassword = findViewById(R.id.editTextPassword);
 
-        btn1.setOnClickListener(view -> {
-            CharSequence text = "Hello toast from Parvathi";
-            Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
-        });
+        // Set onClick listener for the button
+        btn.setOnClickListener(e -> {
+            String password = editTextPassword.getText().toString();
 
-        btn2.setOnClickListener(view -> {
-            String currentText = txt1.getText().toString();
-            if (!currentText.contains("Nair Parvathi")) {
-                txt1.setText(currentText + " Nair Parvathi");
-            }
-        });
-
-        checkBox.setOnClickListener(view -> {
-            if (checkBox.isChecked()) {
-                Toast.makeText(MainActivity.this, "Checkbox is checked!", Toast.LENGTH_SHORT).show();
+            if (checkPasswordComplexity(password)) {
+                txt.setText("Password meets all requirements.");
             } else {
-                Toast.makeText(MainActivity.this, "Checkbox is unchecked!", Toast.LENGTH_SHORT).show();
+                txt.setText("Password does not meet complexity requirements.");
             }
         });
+    }
 
-        radioButton.setOnClickListener(view -> {
-            if (radioButton.isChecked()) {
-                Toast.makeText(MainActivity.this, "Radio button is selected!", Toast.LENGTH_SHORT).show();
-            }
-        });
+    /**
+     * Checks the complexity of the given password to ensure it has at least 8 characters,
+     * one uppercase letter, one lowercase letter, one number, and one special character.
+     *
+     * @param pw The password string to check.
+     * @return True if the password meets the complexity requirements; false otherwise.
+     */
+    public boolean checkPasswordComplexity(String pw) {
+        if (pw.length() < 8) {
+            Toast.makeText(this, "Password must be at least 8 characters long", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
-        switch1.setOnClickListener(view -> {
-            if (switch1.isChecked()) {
-                Toast.makeText(MainActivity.this, "Switch is ON!", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(MainActivity.this, "Switch is OFF!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        boolean foundUpperCase = false;
+        boolean foundLowerCase = false;
+        boolean foundNumber = false;
+        boolean foundSpecial = false;
 
-        imageButton.setOnClickListener(view -> {
-            int width = imageButton.getWidth();
-            int height = imageButton.getHeight();
-            String message = "ImageButton width: " + width + "px, height: " + height + "px";
-            Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-        });
+        for (char c : pw.toCharArray()) {
+            if (Character.isUpperCase(c)) foundUpperCase = true;
+            else if (Character.isLowerCase(c)) foundLowerCase = true;
+            else if (Character.isDigit(c)) foundNumber = true;
+            else if (isSpecialCharacter(c)) foundSpecial = true;
+        }
+
+        if (!foundUpperCase) {
+            Toast.makeText(this, "Missing an uppercase letter", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!foundLowerCase) {
+            Toast.makeText(this, "Missing a lowercase letter", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!foundNumber) {
+            Toast.makeText(this, "Missing a number", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!foundSpecial) {
+            Toast.makeText(this, "Missing a special character", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if a character is a special character.
+     *
+     * @param c The character to check.
+     * @return True if the character is a special character; false otherwise.
+     */
+    public boolean isSpecialCharacter(char c) {
+        return "#$%^&*!@?".indexOf(c) != -1;
     }
 }
