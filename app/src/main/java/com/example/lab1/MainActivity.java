@@ -1,114 +1,77 @@
 package com.example.lab1;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recyclerview.R;
-
-/**
- * MainActivity class for the password checker app.
- *
- * This app checks the complexity of passwords based on specified criteria.
- *
- * @author Parvathi Nair
- * @version 1.0
- */
 public class MainActivity extends AppCompatActivity {
-
-    private EditText editTextPassword; // Input field for password
-    private Button btn; // Button to trigger password check
-    private TextView txt; // TextView to display results
+    Button btn1, btn2;
+    TextView txt1;
+    CheckBox checkBox;
+    RadioButton radioButton;
+    Switch switch1;
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.recyclerview.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-        // Initialize views
-        txt = findViewById(R.id.textVie);
-        btn = findViewById(com.example.recyclerview.R.id.but);
-        editTextPassword = findViewById(R.id.editTextPassword);
+        btn1 = findViewById(R.id.btnHello);
+        btn2 = findViewById(R.id.butChange);
+        txt1 = findViewById(R.id.txtName);
+        checkBox = findViewById(R.id.checkBox);
+        radioButton = findViewById(R.id.radioButton);
+        switch1 = findViewById(R.id.switch1);
+        imageButton = findViewById(R.id.imageButton);
 
-        // Set onClick listener for the button
-        btn.setOnClickListener(e -> {
-            String password = editTextPassword.getText().toString();
+        btn1.setOnClickListener(view -> {
+            CharSequence text = "Hello toast from Parvathi";
+            Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
+        });
 
-            boolean isValid = checkPasswordComplexity(password);
-            if (isValid) {
-                txt.setText("Your password meets the requirements.");
-            } else {
-                txt.setText("You shall not pass!");
+        btn2.setOnClickListener(view -> {
+            String currentText = txt1.getText().toString();
+            if (!currentText.contains("Nair Parvathi")) {
+                txt1.setText(currentText + " Nair Parvathi");
             }
         });
-    }
 
-    /**
-     * Checks the complexity of a password.
-     *
-     * @param pw the password to check
-     * @return true if the password meets all complexity requirements, false otherwise
-     */
-    public boolean checkPasswordComplexity(String pw) {
-        boolean foundUpperCase = false;
-        boolean foundLowerCase = false;
-        boolean foundNumber = false;
-        boolean foundSpecial = false;
+        checkBox.setOnClickListener(view -> {
+            if (checkBox.isChecked()) {
+                Toast.makeText(MainActivity.this, "Checkbox is checked!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Checkbox is unchecked!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        if (pw.length() < 8) {
-            Toast.makeText(this, "Password must be at least 8 characters long.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+        radioButton.setOnClickListener(view -> {
+            if (radioButton.isChecked()) {
+                Toast.makeText(MainActivity.this, "Radio button is selected!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        for (char c : pw.toCharArray()) {
-            if (Character.isUpperCase(c)) foundUpperCase = true;
-            if (Character.isLowerCase(c)) foundLowerCase = true;
-            if (Character.isDigit(c)) foundNumber = true;
-            if (isSpecialCharacter(c)) foundSpecial = true;
-        }
+        switch1.setOnClickListener(view -> {
+            if (switch1.isChecked()) {
+                Toast.makeText(MainActivity.this, "Switch is ON!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Switch is OFF!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        if (!foundUpperCase) {
-            Toast.makeText(this, "Your password does not have an upper case letter.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!foundLowerCase) {
-            Toast.makeText(this, "Your password does not have a lower case letter.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!foundNumber) {
-            Toast.makeText(this, "Your password does not have a number.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!foundSpecial) {
-            Toast.makeText(this, "Your password does not have a special symbol.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true; // All checks passed
-    }
-
-    /**
-     * Checks if a character is a special character.
-     *
-     * @param c the character to check
-     * @return true if the character is a special character, false otherwise
-     */
-    public boolean isSpecialCharacter(char c) {
-        switch (c) {
-            case '#':
-            case '$':
-            case '%':
-            case '^':
-            case '&':
-            case '*':
-            case '!':
-            case '@':
-            case '?':
-                return true;
-            default:
-                return false;
-        }
+        imageButton.setOnClickListener(view -> {
+            int width = imageButton.getWidth();
+            int height = imageButton.getHeight();
+            String message = "ImageButton width: " + width + "px, height: " + height + "px";
+            Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+        });
     }
 }
