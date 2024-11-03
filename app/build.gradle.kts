@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.lab1"
+    namespace = "com.example.recyclerview"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.lab1"
-        minSdk = 24
+        applicationId = "com.example.recyclerview"
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -19,11 +19,11 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+    viewBinding {
+        var enabled = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -41,3 +41,4 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
+
