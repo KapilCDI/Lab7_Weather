@@ -1,65 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:background="@android:color/white">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Title TextView -->
     <TextView
-        android:id="@+id/textViewPrompt"
+        android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter your Password:"
-        android:textColor="#4CAF50"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentTop="true"/>
+        android:text="Enter City Name"
+        android:textSize="18sp" />
 
-    <!-- Password Input Field -->
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextCity"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/textViewPrompt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColor="#000000"
-        android:textSize="28dp"
-        android:background="@drawable/edit_text_bg"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"/>
+        android:layout_height="wrap_content"
+        android:hint="City Name"
+        android:minHeight="48dp" />
 
-    <!-- Result TextView -->
-    <TextView
-        android:id="@+id/textViewResult"
-        android:layout_width="284dp"
-        android:layout_height="55dp"
-        android:layout_below="@id/editTextPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Please enter a valid password"
-        android:textAlignment="center"
-        android:textColor="#FF5722"
-        android:textSize="18sp" />
-
-    <!-- Login Button -->
     <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="391dp"
-        android:layout_height="63dp"
-        android:layout_below="@id/textViewResult"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginBottom="300dp"
-        android:background="#4CAF50"
-        android:text="Login"
-        android:textColor="#263238"
-        android:textSize="18sp" />
+        android:id="@+id/buttonGetForecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Forecast" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textCurrentTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="Current Temp: " />
+
+    <TextView
+        android:id="@+id/textMaxTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="Max Temp: " />
+
+    <TextView
+        android:id="@+id/textMinTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="Min Temp: " />
+
+    <TextView
+        android:id="@+id/textHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="Humidity: " />
+
+    <ImageView
+        android:id="@+id/imageWeatherIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="Description: " />
+
+</LinearLayout>

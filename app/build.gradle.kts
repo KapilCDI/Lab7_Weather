@@ -55,4 +55,6 @@ dependencies {
     testImplementation(" org.robolectric:robolectric:4.8")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    implementation ("com.android.volley:volley:1.2.1")
+
 }
